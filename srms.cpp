@@ -10,7 +10,7 @@ using namespace std;
 // the class that stores data
 class student
 {
-    int rollNumber;
+    int rollno;
     char name[50];
     int eng_marks, math_marks, sci_marks, lang2_marks, cs_marks;
     double average;
@@ -20,7 +20,7 @@ public:
     void getdata();
     void showdata() const;
     void calculate();
-    int retrollNumber() const;
+    int retrollno() const;
 }; //class ends here
 
 void student::calculate()
@@ -39,7 +39,7 @@ void student::calculate()
 void student::getdata()
 {
     cout << "\nEnter student's roll number: ";
-    cin >> rollNumber;
+    cin >> rollno;
     cout << "\n\nEnter student name: ";
     cin.ignore();
     cin.getline(name, 50);
@@ -58,7 +58,7 @@ void student::getdata()
 }
 void student::showdata() const
 {
-    cout << "\nRoll number of student : " << rollNumber;
+    cout << "\nRoll number of student : " << rollno;
     cout << "\nName of student : " << name;
     cout << "\nEnglish : " << eng_marks;
     cout << "\nMaths : " << math_marks;
@@ -68,9 +68,9 @@ void student::showdata() const
     cout << "\nAverage Marks :" << average;
     cout << "\nGrade of student is :" << grade;
 }
-int student::retrollNumber() const
+int student::retrollno() const
 {
-    return rollNumber;
+    return rollno;
 }
 //function declaration
 void create_student();
@@ -95,7 +95,7 @@ int main()
         cout << "\n\n\t4.Delete student record";
         cout << "\n\n\t5.Modify student record";
         cout << "\n\n\t6.Exit";
-        cout << "\n\n\What is your Choice (1/2/3/4/5/6) ";
+        cout << "\n\n Enter Choice (1/2/3/4/5/6) ";
         cin >> ch;
         system("cls");
         switch (ch)
@@ -157,7 +157,7 @@ void display_all()
     cout << "\n\n\n\t\tDISPLAYING ALL RECORDS\n\n";
     while (inFile.read(reinterpret_cast<char *>(&stud), sizeof(student)))
     {
-        st.showdata();
+        stud.showdata();
         cout << "\n\n====================================\n";
     }
     inFile.close();
@@ -180,7 +180,7 @@ void display_sp(int n)
     bool flag = false;
     while (iFile.read(reinterpret_cast<char *>(&stud), sizeof(student)))
     {
-        if (stud.retrollNumber() == n)
+        if (stud.retrollno() == n)
         {
             stud.showdata();
             flag = true;
@@ -209,7 +209,7 @@ void change_student(int n)
     while (!fl.eof() && found == false)
     {
         fl.read(reinterpret_cast<char *>(&stud), sizeof(student));
-        if (stud.retrollNumber() == n)
+        if (stud.retrollno() == n)
         {
             stud.showdata();
             cout << "\n\Enter new student details:" << endl;
@@ -221,7 +221,7 @@ void change_student(int n)
             found = true;
         }
     }
-    File.close();
+    fl.close();
     if (found == false)
         cout << "\n\n Record Not Found ";
     cin.ignore();
@@ -245,7 +245,7 @@ void delete_student(int n)
     iFile.seekg(0, ios::beg);
     while (iFile.read(reinterpret_cast<char *>(&stud), sizeof(student)))
     {
-        if (stud.retrollNumber() != n)
+        if (stud.retrollno() != n)
         {
             oFile.write(reinterpret_cast<char *>(&stud), sizeof(student));
         }
